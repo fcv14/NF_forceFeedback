@@ -67,7 +67,7 @@ public class GameSceneManager : MonoSingleton<GameSceneManager>, IGameManager
             GameTaskManager.Instance.StartGameTask,
             
             //TODO 转场出场景需要做的事情
-        }, GobalData.MainScene);
+        }, GobalData.GameScene);
     }
 
     void IGameManager.ManagerInit()
