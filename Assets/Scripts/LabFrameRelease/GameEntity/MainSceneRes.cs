@@ -6,9 +6,9 @@ public class MainSceneRes : GameSceneEntityRes
 {
     public Transform spanwPos;
 
-    public ClickableCubeEntity clickable_prefab;
+    public GameEntityBase clickable_prefab;
 
-    public GamePlayerEntity GamePlayerEntity;
+    public GameEntityBase GamePlayerEntity;
 
     public Mesh cubeMesh;
 }

@@ -11,17 +11,18 @@ public class MissionTask : TaskBase
     private Transform reSpawn_parent;
     private Mesh trg_mesh;
 
-    private List<GameObject> List_triggers = new List<GameObject>();
+    public static List<GameObject> List_triggers = new List<GameObject>();
     private List<GameObject> List_TempSavedParent = new List<GameObject>();
-    private List<GameObject> List_WallCubes = new List<GameObject>();
+    //private List<GameObject> List_WallCubes = new List<GameObject>();
     private List<GameObject> List_TempSavedTrgParent = new List<GameObject>();
+
+    public static bool Bool_Gameover = false;
 
     public override IEnumerator TaskInit()
     {
         //ClickableCube = GameEntityManager.Instance.GetCurrentSceneRes<MainSceneRes>().clickable_prefab;
         reSpawn_parent = GameEntityManager.Instance.GetCurrentSceneRes<MainSceneRes>().spanwPos;
         //GamePlayerEntity = GameEntityManager.Instance.GetCurrentSceneRes<MainSceneRes>().GamePlayerEntity;
-
 
 
         yield return null;
@@ -32,11 +33,16 @@ public class MissionTask : TaskBase
     {
         foreach (string a in GameDataManager.FlowData.List_tasksName)
         {
+            List_TempSavedTrgParent.Clear();
+            List_TempSavedParent.Clear();
+            List_triggers.Clear();
+            TriggerEntity.Bool_ALL_TEandCC = false;
             LoadTaskData(a);
-            yield return new WaitUntil(()=>false);
-
+            yield return new WaitUntil(()=>TriggerEntity.Bool_ALL_TEandCC);
             DestroyTaskData();
         }
+        Bool_Gameover = true;
+
         
         yield return null;
     }
@@ -141,7 +147,7 @@ public class MissionTask : TaskBase
 
             cubeRebiuld.layer = 8;             //8為clickableLayer
             cubeRebiuld.tag = "Touchable";
-            List_WallCubes.Add(cubeRebiuld);
+            //List_WallCubes.Add(cubeRebiuld);
         }
         //trgs
         for (int i = 0; i < taskdata.List_triggerParentData.Count; i++)
@@ -164,7 +170,7 @@ public class MissionTask : TaskBase
                 trg.transform.SetParent(trgParent.transform);
                 trg.AddComponent<MeshFilter>();
                 trg.AddComponent<MeshRenderer>();
-                trg.GetComponent<MeshFilter>().mesh = trg_mesh;//??
+                trg.GetComponent<MeshFilter>().mesh = trg_mesh;
                 trg.AddComponent<BoxCollider>();
                 trg.GetComponent<BoxCollider>().isTrigger = true;
 
@@ -175,7 +181,7 @@ public class MissionTask : TaskBase
                 trgCenterPos.y -= 0.4f;
                 trg.GetComponent<BoxCollider>().center = trgCenterPos;
 
-                //trg.AddComponent<Trigger>();//script
+                trg.AddComponent<TriggerEntity>();//script
 
                 Vector3 temp_trgPos = new Vector3();
                 temp_trgPos.x = taskdata.List_triggerParentData[i].List_triggerData[j].TriggerPos[0];

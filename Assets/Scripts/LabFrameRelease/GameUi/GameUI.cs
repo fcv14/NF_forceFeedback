@@ -15,15 +15,31 @@ public class GameUI : MonoBehaviour
     public GameObject Obj_GameOver;
     public Text Txt_totalTime;
     public Button Btn_Exit;
-    //完成GameUI後 開始導入 力反饋 與完成ALL TRIGGER ENTER
-
-
+    
+    
     private float[] time;
+    private bool _isGameover = false;
+    public bool IsGameOver
+    {
+        get { return _isGameover; }
+        set
+        {
+            if (MissionTask.Bool_Gameover == _isGameover)
+                return;
+
+            _isGameover = MissionTask.Bool_Gameover;
+            if (_isGameover)
+            {
+                Obj_GameOver.SetActive(true);
+            }
+        }
+    }
+
     void Start()
     {
         Btn_Okay_NextTask.onClick.AddListener(delegate { NextTask(); });
         Btn_Exit.onClick.AddListener(delegate { Exit(); });
-
+        
     }
 
     void Update()

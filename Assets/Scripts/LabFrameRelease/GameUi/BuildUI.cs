@@ -59,6 +59,7 @@ public class BuildUI : MonoBehaviour
 
         ColorInit();
     }
+
     void Make_Hole()
     {
         if (BuildTask.List_selectedCubes.Count != 0)
@@ -156,10 +157,19 @@ public class BuildUI : MonoBehaviour
         }
         else
         {
-            TaskSave();
-            Txt_TaskBuildScuccessfully.text = "Task建立完成!";
-            Obj_TaskBuildSuccessfully.SetActive(true);
-            //saveWork
+            try
+            {
+                TaskSave();
+                Txt_TaskBuildScuccessfully.text = "Task建立完成!";
+                Obj_TaskBuildSuccessfully.SetActive(true);
+                //saveWork
+            }
+            catch 
+            {
+                Txt_TaskBuildScuccessfully.text = "關卡名稱重複 請使用新的名稱!";
+                Obj_TaskBuildSuccessfully.SetActive(true);
+            }
+            
         }
     }
 

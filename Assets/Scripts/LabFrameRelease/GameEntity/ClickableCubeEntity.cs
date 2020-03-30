@@ -26,8 +26,8 @@ public class ClickableCubeEntity : GameEntityBase
         {
             gameObject.GetComponent<Renderer>().material.color = Color_clicked;
             Bool_firstClicked = true;
-            BuildTask.List_selectedCubes.Add(this);
-            BuildTask.List_wallCubes.Remove(this);
+            BuildTask.List_selectedCubes.Add(this.gameObject);
+            BuildTask.List_wallCubes.Remove(this.gameObject);
             obj_first_selected = this.gameObject;
         }
         //第一個之後選的
@@ -40,8 +40,8 @@ public class ClickableCubeEntity : GameEntityBase
                 {
                     gameObject.GetComponent<Renderer>().material.color = Color_clicked;
                     Bool_firstClicked = true;
-                    BuildTask.List_selectedCubes.Add(this);
-                    BuildTask.List_wallCubes.Remove(this);
+                    BuildTask.List_selectedCubes.Add(this.gameObject);
+                    BuildTask.List_wallCubes.Remove(this.gameObject);
                 }
             }
         }
@@ -51,8 +51,8 @@ public class ClickableCubeEntity : GameEntityBase
     {
         gameObject.GetComponent<Renderer>().material.color = Color_original;
         Bool_firstClicked = false;
-        BuildTask.List_selectedCubes.Remove(this);
-        BuildTask.List_wallCubes.Add(this);
+        BuildTask.List_selectedCubes.Remove(this.gameObject);
+        BuildTask.List_wallCubes.Add(this.gameObject);
     }
 
 

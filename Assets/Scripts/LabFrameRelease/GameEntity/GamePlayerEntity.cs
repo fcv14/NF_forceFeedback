@@ -35,11 +35,9 @@ public class GamePlayerEntity : GameEntityBase
     }
 
 
-
-
     public override void EntityDispose()
     {
-        throw new System.NotImplementedException();
+        
     }
 
 

@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class BuildTask : TaskBase
 {
-    private ClickableCubeEntity ClickableCube;
-    private GamePlayerEntity GamePlayerEntity;
+    private GameObject ClickableCube;
+    private GameObject GamePlayerEntity;
     private Transform spawn_parent;
     
-    public static List<ClickableCubeEntity> List_wallCubes = new List<ClickableCubeEntity>();          //牆之方塊List
+    public static List<GameObject> List_wallCubes = new List<GameObject>();          //牆之方塊List
     public static List<GameObject> List_triggers = new List<GameObject>();           //全部之trigger
-    public static List<ClickableCubeEntity> List_selectedCubes = new List<ClickableCubeEntity>();      //被選取方塊
+    public static List<GameObject> List_selectedCubes = new List<GameObject>();      //被選取方塊
 
 
 
@@ -18,16 +18,15 @@ public class BuildTask : TaskBase
 
     public override IEnumerator TaskInit()
     {
-        ClickableCube = GameEntityManager.Instance.GetCurrentSceneRes<MainSceneRes>().clickable_prefab;
+        ClickableCube = GameEntityManager.Instance.GetCurrentSceneRes<MainSceneRes>().clickable_prefab.gameObject;
         spawn_parent = GameEntityManager.Instance.GetCurrentSceneRes<MainSceneRes>().spanwPos;
-        GamePlayerEntity = GameEntityManager.Instance.GetCurrentSceneRes<MainSceneRes>().GamePlayerEntity;
+        GamePlayerEntity = GameEntityManager.Instance.GetCurrentSceneRes<MainSceneRes>().GamePlayerEntity.gameObject;
 
 
 
         yield return null;
     }
-
-
+    
     public override IEnumerator TaskStart()
     {
         Create_CubeWall(10, 10);
@@ -54,7 +53,7 @@ public class BuildTask : TaskBase
             for (x = -width / 2; x < width / 2; x++)
             {
                 pos = new Vector3(x, y, z);
-                var cube = GameObject.Instantiate(ClickableCube, pos, Quaternion.identity, spawn_parent);
+                var cube = GameObject.Instantiate(ClickableCube.gameObject, pos, Quaternion.identity, spawn_parent);
                 cube.name = "cube" + cube_Num;
                 cube_Num++;
                 List_wallCubes.Add(cube);

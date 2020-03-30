@@ -5,8 +5,8 @@ using LabData;
 
 public class EditTask : TaskBase
 {
-    private ClickableCubeEntity ClickableCube ;
-    private GamePlayerEntity GamePlayerEntity ;
+    private GameObject ClickableCube ;
+    private GameObject GamePlayerEntity ;
     private Transform reSpawn_parent;
     private Mesh trg_mesh;
 
@@ -21,8 +21,8 @@ public class EditTask : TaskBase
     private string taskname;
     public override IEnumerator TaskInit()
     {
-        ClickableCube = GameEntityManager.Instance.GetCurrentSceneRes<MainSceneRes>().clickable_prefab;
-        GamePlayerEntity = GameEntityManager.Instance.GetCurrentSceneRes<MainSceneRes>().GamePlayerEntity;
+        ClickableCube = GameEntityManager.Instance.GetCurrentSceneRes<MainSceneRes>().clickable_prefab.gameObject;
+        GamePlayerEntity = GameEntityManager.Instance.GetCurrentSceneRes<MainSceneRes>().GamePlayerEntity.gameObject;
         reSpawn_parent = GameEntityManager.Instance.GetCurrentSceneRes<MainSceneRes>().spanwPos;
         trg_mesh = GameEntityManager.Instance.GetCurrentSceneRes<MainSceneRes>().cubeMesh;
 
@@ -164,7 +164,7 @@ public class EditTask : TaskBase
                 trg.transform.SetParent(trgParent.transform);
                 trg.AddComponent<MeshFilter>();
                 trg.AddComponent<MeshRenderer>();
-                trg.GetComponent<MeshFilter>().mesh = trg_mesh;//??
+                trg.GetComponent<MeshFilter>().mesh = trg_mesh;//code生成mesh有點麻煩所以到unity用掛的
                 trg.AddComponent<BoxCollider>();
                 trg.GetComponent<BoxCollider>().isTrigger = true;
 

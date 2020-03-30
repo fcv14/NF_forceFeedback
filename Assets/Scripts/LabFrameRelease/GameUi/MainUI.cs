@@ -23,7 +23,6 @@ public class MainUI : MonoBehaviour
 
     [Header("MissionBuild_UI")]
     public GameObject Obj_MissionCreateUI;
-    //public InputField IPF_TaskNumForMission;
     public Button Btn_TaskAdd2Mission;
     public Button Btn_BuildMissionConfirm;
     public Dropdown Dropdown_taskName;
@@ -31,7 +30,10 @@ public class MainUI : MonoBehaviour
     public Button Btn_DeleteTask;
     public Button Btn_Back2StartUI;
     public Button Btn_BuildTask;
+    public GameObject Obj_TaskAddedSuccessfully;
+    public Button Btn_Okay_TaskAddedSuccessfully;
     public GameObject Obj_MissionCreateSuccessfully;
+    public Text Txt_MissionCreateSuccessfully;
     public Button Btn_Okay_MissionCreateSuccessfully;
 
     [Header("whileInputNull_UI")]
@@ -40,20 +42,16 @@ public class MainUI : MonoBehaviour
 
     public List<string> List_taskAdd = new List<string>();
     public Data_TaskS data_tasks = new Data_TaskS();
-    //public Data_Mission data_thisMission = new Data_Mission();
     public Data_Missions data_Missions = new Data_Missions();
 
 
     private void Start()
     {
-        //GameDataManager.FlowData = new GameFlowData(userID.text);
-
         //StartUI Buttons
         Btn_loadMission.onClick.AddListener(delegate { Load_Mission(); });
         Btn_deleteMission.onClick.AddListener(delegate { Delete_Mission(); });
         Btn_EnterMissionName.onClick.AddListener(delegate { EnterMissionName(); });
         Btn_GO2buildMission.onClick.AddListener(delegate { GO2Build_MissionUI(); });
-
         //MissionBuildUI Buttons
         Btn_TaskAdd2Mission.onClick.AddListener(delegate{ TaskAdd2Mission(); });
         Btn_BuildMissionConfirm.onClick.AddListener(delegate { Build_Mission(); });
@@ -61,20 +59,11 @@ public class MainUI : MonoBehaviour
         Btn_DeleteTask.onClick.AddListener(delegate { Delete_Task(); });
         Btn_Back2StartUI.onClick.AddListener(delegate { Back2StartUI(); });
         Btn_BuildTask.onClick.AddListener(delegate { Build_Task(); });
+        Btn_Okay_TaskAddedSuccessfully.onClick.AddListener(delegate { Okay_TaskAddedSuc(); });
         Btn_Okay_MissionCreateSuccessfully.onClick.AddListener(delegate { Okay_MissonBuildSuc(); });
-
         //NullInput Buttons
         Btn_Okay_WhileInputNull.onClick.AddListener(delegate { Okay_HintObjFunction(); });
-
         
-        //載入任務dropdown List
-        //Data_missionname data_Missionname = LabTools.GetData<Data_missionname>("missionName");
-
-        //Dictionary<string, string> Dic_missions = data_Missionname.mission_Dic;
-
-        //Dropdown_missionName.ClearOptions();
-
-        //Dropdown_missionName.AddOptions(Dic_missions.Keys.ToList());
 
         //載入Task dropdown List
         data_tasks = LabTools.GetData<Data_TaskS>("AllTasks");
@@ -104,8 +93,12 @@ public class MainUI : MonoBehaviour
 
     void Delete_Mission()
     {
-        
-        
+        data_Missions.Dic_missions.Remove(Dropdown_missionName.captionText.text);
+
+        LabTools.CreateDataFolder<Data_Missions>();
+        LabTools.WriteData<Data_Missions>(data_Missions, "AllMissions", true);
+        Dropdown_missionName.ClearOptions();
+        Dropdown_missionName.AddOptions(data_Missions.Dic_missions.Keys.ToList());
     }
 
     void EnterMissionName()
@@ -153,6 +146,7 @@ public class MainUI : MonoBehaviour
 
     void TaskAdd2Mission()
     {
+        Obj_TaskAddedSuccessfully.SetActive(true);
         List_taskAdd.Add(Dropdown_taskName.captionText.text);
     }
 
@@ -170,16 +164,24 @@ public class MainUI : MonoBehaviour
         {
             //跳出建立完成視窗
             //執行任務創建工作
-            data_Missions.Dic_missions.Add(IPF_newMissionName.text, List_taskAdd);
+            try {
+                data_Missions.Dic_missions.Add(IPF_newMissionName.text, List_taskAdd);
+
+                LabTools.CreateDataFolder<Data_Missions>();
+                LabTools.WriteData<Data_Missions>(data_Missions, "AllMissions", true);
+
+                data_Missions = LabTools.GetData<Data_Missions>("AllMissions");
+                Dropdown_missionName.ClearOptions();
+                Dropdown_missionName.AddOptions(data_Missions.Dic_missions.Keys.ToList());
+
+                Txt_MissionCreateSuccessfully.text = "任務創建完成！";
+                Obj_MissionCreateSuccessfully.SetActive(true);
+            }
+            catch {
+                Txt_MissionCreateSuccessfully.text = "任務名稱重複 請更換任務名稱!";
+                Obj_MissionCreateSuccessfully.SetActive(true);
+            }
             
-            LabTools.CreateDataFolder<Data_Missions>();
-            LabTools.WriteData<Data_Missions>(data_Missions, "AllMissions", true);
-
-            data_Missions = LabTools.GetData<Data_Missions>("AllMissions");
-            Dropdown_missionName.ClearOptions();
-            Dropdown_missionName.AddOptions(data_Missions.Dic_missions.Keys.ToList());
-
-            Obj_MissionCreateSuccessfully.SetActive(true);
         }
 
     }
@@ -219,6 +221,10 @@ public class MainUI : MonoBehaviour
     {
         Obj_MissionCreateUI.SetActive(false);
         Obj_StartUI.SetActive(true);
+    }
+
+    void Okay_TaskAddedSuc() {
+        Obj_TaskAddedSuccessfully.SetActive(false);
     }
 
     void Okay_MissonBuildSuc()
