@@ -98,7 +98,7 @@ public class GameApplication : MonoSingleton<GameApplication>
         GameFlowData gameFlowData = new GameFlowData();
         GameDataManager.FlowData = LabTools.GetDataByString<GameFlowData>(gameFlowData.ToJson());
         GameDataManager.LabDataManager.LabDataCollectInit(()=> GameDataManager.FlowData.UserId);
-        GameSceneManager.Instance.Change2MainScene();
+        GameSceneManager.Instance.Change2GameScene();
     }
 
     /// <summary>

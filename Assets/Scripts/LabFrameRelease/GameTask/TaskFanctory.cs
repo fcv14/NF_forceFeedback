@@ -9,8 +9,9 @@ public class TaskFanctory
     {
         var temptasks = new List<TaskBase>
         {
-
+            new EditTask()
         };
+        
         return temptasks;
     }
 }

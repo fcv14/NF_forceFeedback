@@ -10,7 +10,7 @@ public class GameUIManager : MonoSingleton<GameUIManager>, IGameManager
     int IGameManager.Weight => GobalData.GameUIManagerWeight;
 
     public MainUI MainUi { get; private set; }
-    public GameUI GameUI { get; private set; }
+    public BuildUI GameUI { get; private set; }
 
     IEnumerator IGameManager.ManagerDispose()
     {
@@ -29,7 +29,7 @@ public class GameUIManager : MonoSingleton<GameUIManager>, IGameManager
     public void StartMainUiLogic()
     {
         MainUi = FindObjectOfType<MainUI>();
-        GameUI = FindObjectOfType<GameUI>();
+        GameUI = FindObjectOfType<BuildUI>();
     }
 }
 

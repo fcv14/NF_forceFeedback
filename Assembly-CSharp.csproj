@@ -615,6 +615,8 @@
     <Compile Include="Assets\Scripts\LabFrameRelease\GameDataModules\GameDataManager.cs" />
     <Compile Include="Assets\Scripts\LabFrameRelease\GameDataModules\GameFlowData.cs" />
     <Compile Include="Assets\Scripts\LabFrameRelease\GameDataModules\GobalData.cs" />
+    <Compile Include="Assets\Scripts\LabFrameRelease\GameEntity\ClickableCubeEntity.cs" />
+    <Compile Include="Assets\Scripts\LabFrameRelease\GameEntity\CubeEntity.cs" />
     <Compile Include="Assets\Scripts\LabFrameRelease\GameEntity\GameEntityBase.cs" />
     <Compile Include="Assets\Scripts\LabFrameRelease\GameEntity\GameEntityController.cs" />
     <Compile Include="Assets\Scripts\LabFrameRelease\GameEntity\GameEntityManager.cs" />
@@ -623,6 +625,7 @@
     <Compile Include="Assets\Scripts\LabFrameRelease\GameEntity\GameSceneEntityRes.cs" />
     <Compile Include="Assets\Scripts\LabFrameRelease\GameEntity\IGameEntityController.cs" />
     <Compile Include="Assets\Scripts\LabFrameRelease\GameEntity\MainSceneRes.cs" />
+    <Compile Include="Assets\Scripts\LabFrameRelease\GameEntity\NonClickableCubeEntity.cs" />
     <Compile Include="Assets\Scripts\LabFrameRelease\GameEvent\GameEventCenter.cs" />
     <Compile Include="Assets\Scripts\LabFrameRelease\GameInput\GameInputController.cs" />
     <Compile Include="Assets\Scripts\LabFrameRelease\GameInput\Inputinterface\IKinectTrack.cs" />
@@ -631,16 +634,22 @@
     <Compile Include="Assets\Scripts\LabFrameRelease\GameInput\Leap\LeapInput.cs" />
     <Compile Include="Assets\Scripts\LabFrameRelease\GameScene\GameSceneManager.cs" />
     <Compile Include="Assets\Scripts\LabFrameRelease\GameScene\GameSceneResources.cs" />
+    <Compile Include="Assets\Scripts\LabFrameRelease\GameTask\BuildTask.cs" />
+    <Compile Include="Assets\Scripts\LabFrameRelease\GameTask\EditTask.cs" />
     <Compile Include="Assets\Scripts\LabFrameRelease\GameTask\GameTask.cs" />
     <Compile Include="Assets\Scripts\LabFrameRelease\GameTask\GameTaskManager.cs" />
     <Compile Include="Assets\Scripts\LabFrameRelease\GameTask\ITask.cs" />
+    <Compile Include="Assets\Scripts\LabFrameRelease\GameTask\MissionTask.cs" />
     <Compile Include="Assets\Scripts\LabFrameRelease\GameTask\TaskBase.cs" />
     <Compile Include="Assets\Scripts\LabFrameRelease\GameTask\TaskFanctory.cs" />
+    <Compile Include="Assets\Scripts\LabFrameRelease\GameUi\BuildUI.cs" />
+    <Compile Include="Assets\Scripts\LabFrameRelease\GameUi\EditUI.cs" />
     <Compile Include="Assets\Scripts\LabFrameRelease\GameUi\GameUI.cs" />
     <Compile Include="Assets\Scripts\LabFrameRelease\GameUi\GameUIManager.cs" />
     <Compile Include="Assets\Scripts\LabFrameRelease\GameUi\MainSceneUI.cs" />
     <Compile Include="Assets\Scripts\LabFrameRelease\GameUi\MainUI.cs" />
-    <Compile Include="Assets\Scripts\LabFrameRelease\LabData\Data_missionname.cs" />
+    <Compile Include="Assets\Scripts\LabFrameRelease\LabData\Data_Missions.cs" />
+    <Compile Include="Assets\Scripts\LabFrameRelease\LabData\Data_Task.cs" />
     <Compile Include="Assets\Scripts\LabFrameRelease\LabData\DataSync\Scripts\UnityApplicationFolderProvider.cs" />
     <Compile Include="Assets\Scripts\LabFrameRelease\LabData\DataSync\Scripts\UnityApplicationLifeCycle.cs" />
     <Compile Include="Assets\Scripts\LabFrameRelease\LabData\DataSync\Test\TestData.cs" />
@@ -678,6 +687,7 @@
     <Compile Include="Assets\Scripts\UIFrameWork\UIController\UIController.cs" />
     <None Include="Assets\LabDataVisualization\Vectrosity\Vectrosity\Plugins\VectrosityDemos\ImageEffects\Shaders\_BloomAndFlares\MobileBloom.shader" />
     <None Include="Assets\EquipmentSDK\LeapMotion\Core\Shaders\RuntimeGizmos.shader" />
+    <None Include="Assets\TestData\ log.txt" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/user/Desktop/gitHub/NF_forceFeedback/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

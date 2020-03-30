@@ -26,7 +26,7 @@ namespace TestGameFrame
 
             GameDataManager.LabDataManager.LabDataCollectInit(() => Id);
 
-            GameSceneManager.Instance.Change2MainScene();
+            GameSceneManager.Instance.Change2GameScene();
         }
     }
 }

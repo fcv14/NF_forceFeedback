@@ -9,11 +9,6 @@ namespace GameData
 {
     public class GameFlowData : LabDataBase
     {
-        ///// <summary>
-        ///// 语言
-        ///// </summary>
-        //public Language Language { get; set; }
-
         /// <summary>
         /// 用户ID
         /// </summary>
@@ -22,25 +17,44 @@ namespace GameData
         /// <summary>
         /// 任務名稱
         /// </summary>
-        public string MissionName { get; set; } = "Test02";
+        public Data_Missions Missions { get; set; }//還沒用
 
+
+        /// <summary>
+        /// Tasks
+        /// </summary>
+        public Data_TaskS DataTasks { get; set; }
+        
+       
+        ///<summary>
+        ///轉Edit Task要用的Task Name
+        /// </summary>
+        public string TaskName { get; set; }
+
+
+        public List<string> List_tasksName { get; set; }
 
         /// <summary>
         /// FlowData 构造函数
         /// </summary>
-        /// <param name="UserID"></param>
-        /// <param name="languageType"></param>
-        /// <param name="remindType"></param>
-        /// <param name="gameData"></param>
-        public GameFlowData(string UserID,string Missionname)
+        public GameFlowData(string userID , Data_TaskS data_tasks)
         {
-            UserId = UserID;
-            MissionName = Missionname;
+            UserId = userID;
+            DataTasks = data_tasks;
         }
 
-        
-        public GameFlowData()
+        public GameFlowData(string taskname)
         {
+            TaskName = taskname;
         }
+
+        public GameFlowData(string userID ,List<string> list_tasksName)
+        {
+            UserId = userID;
+            List_tasksName = list_tasksName;
+        }
+
+
+        public GameFlowData() { }
     }
 }

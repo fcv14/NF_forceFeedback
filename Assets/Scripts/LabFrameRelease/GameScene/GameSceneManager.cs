@@ -58,7 +58,7 @@ public class GameSceneManager : MonoSingleton<GameSceneManager>, IGameManager
     /// <summary>
     /// 跳转到主场景
     /// </summary>
-    public void Change2MainScene()
+    public void Change2GameScene()
     {
         ChangeScene(new List<Action>()
         {
@@ -69,6 +69,37 @@ public class GameSceneManager : MonoSingleton<GameSceneManager>, IGameManager
             //TODO 转场出场景需要做的事情
         }, GobalData.GameScene);
     }
+
+    /// <summary>
+    /// 跳轉至Build task場景
+    /// </summary>
+    public void Change2BuildScene()
+    {
+        ChangeScene(new List<Action>()
+        {
+
+            GameEntityManager.Instance.SetSceneEntity,
+            GameTaskManager.Instance.StartGameTask,
+            
+            //TODO 转场出场景需要做的事情
+        }, GobalData.BuildScene);
+    }
+
+    /// <summary>
+    /// 跳轉至Edit task場景
+    /// </summary>
+    public void Change2EditScene()
+    {
+        ChangeScene(new List<Action>()
+        {
+
+            GameEntityManager.Instance.SetSceneEntity,
+            GameTaskManager.Instance.StartGameTask,
+            
+            //TODO 转场出场景需要做的事情
+        }, GobalData.EditScene);
+    }
+
 
     void IGameManager.ManagerInit()
     {
