@@ -9,7 +9,7 @@ public class TaskFanctory
     {
         var temptasks = new List<TaskBase>
         {
-            new EditTask()
+            new BuildTask()
         };
         
         return temptasks;

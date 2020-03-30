@@ -58,7 +58,7 @@ public class ClickableCubeEntity : GameEntityBase
 
 
 
-public override void EntityDispose()
+    public override void EntityDispose()
     {
         throw new System.NotImplementedException();
     }

@@ -34,12 +34,12 @@ public class EditTask : TaskBase
 
     public override IEnumerator TaskStart()
     {
-        throw new System.NotImplementedException();
+        yield return null;
     }
 
     public override IEnumerator TaskStop()
     {
-        throw new System.NotImplementedException();
+        yield return null;
     }
 
     void LoadTaskData(string taskName)
