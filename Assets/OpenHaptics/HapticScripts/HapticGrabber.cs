@@ -152,7 +152,7 @@ public class HapticGrabber : MonoBehaviour
 	void OnCollisionEnter(Collision collisionInfo)
 	{
 		Collider other = collisionInfo.collider;
-		Debug.unityLogger.Log("OnCollisionEnter : " + other.name);
+		//Debug.unityLogger.Log("OnCollisionEnter : " + other.name);
 		GameObject that = other.gameObject;
 		Rigidbody thatBody = that.GetComponent<Rigidbody>();
 

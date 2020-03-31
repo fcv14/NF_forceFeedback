@@ -24,7 +24,7 @@ public class EditTask : TaskBase
         ClickableCube = GameEntityManager.Instance.GetCurrentSceneRes<MainSceneRes>().clickable_prefab.gameObject;
         GamePlayerEntity = GameEntityManager.Instance.GetCurrentSceneRes<MainSceneRes>().GamePlayerEntity.gameObject;
         reSpawn_parent = GameEntityManager.Instance.GetCurrentSceneRes<MainSceneRes>().spanwPos;
-        trg_mesh = GameEntityManager.Instance.GetCurrentSceneRes<MainSceneRes>().cubeMesh;
+        trg_mesh = GameEntityManager.Instance.GetCurrentSceneRes<MainSceneRes>().CubeMesh.GetComponent<Mesh>();
 
 
         taskname = GameDataManager.FlowData.TaskName;

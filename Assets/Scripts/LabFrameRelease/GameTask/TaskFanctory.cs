@@ -9,9 +9,8 @@ public class TaskFanctory
     {
         var temptasks = new List<TaskBase>
         {
-            new BuildTask()
+            new MissionTask()
         };
-        
         return temptasks;
     }
 }

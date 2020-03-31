@@ -10,20 +10,20 @@ public class MissionTask : TaskBase
     private GamePlayerEntity GamePlayerEntity;
     private Transform reSpawn_parent;
     private Mesh trg_mesh;
+    private GameObject OMNI;
 
+    public static List<GameObject> List_WallCubes = new List<GameObject>();
     public static List<GameObject> List_triggers = new List<GameObject>();
-    private List<GameObject> List_TempSavedParent = new List<GameObject>();
-    //private List<GameObject> List_WallCubes = new List<GameObject>();
-    private List<GameObject> List_TempSavedTrgParent = new List<GameObject>();
+    public static List<GameObject> List_TempSavedParent = new List<GameObject>();
+    public static List<GameObject> List_TempSavedTrgParent = new List<GameObject>();
 
-    public static bool Bool_Gameover = false;
-
+    
     public override IEnumerator TaskInit()
     {
         //ClickableCube = GameEntityManager.Instance.GetCurrentSceneRes<MainSceneRes>().clickable_prefab;
         reSpawn_parent = GameEntityManager.Instance.GetCurrentSceneRes<MainSceneRes>().spanwPos;
-        //GamePlayerEntity = GameEntityManager.Instance.GetCurrentSceneRes<MainSceneRes>().GamePlayerEntity;
-
+        trg_mesh = GameEntityManager.Instance.GetCurrentSceneRes<MainSceneRes>().CubeMesh.GetComponent<MeshFilter>().sharedMesh;
+        OMNI = GameEntityManager.Instance.GetCurrentSceneRes<MainSceneRes>().OMNI;
 
         yield return null;
     }
@@ -31,18 +31,26 @@ public class MissionTask : TaskBase
 
     public override IEnumerator TaskStart()
     {
-        foreach (string a in GameDataManager.FlowData.List_tasksName)
+        foreach (string taskName in GameDataManager.FlowData.List_tasksName)
         {
+            OMNI.SetActive(false);//若不先disable掉會造成碰撞問題
+
             List_TempSavedTrgParent.Clear();
             List_TempSavedParent.Clear();
             List_triggers.Clear();
-            TriggerEntity.Bool_ALL_TEandCC = false;
-            LoadTaskData(a);
-            yield return new WaitUntil(()=>TriggerEntity.Bool_ALL_TEandCC);
-            DestroyTaskData();
-        }
-        Bool_Gameover = true;
+            
+            LoadTaskData(taskName);
+            //GameEventCenter.DispatchEvent("alpha_refresh");
+            OMNI.SetActive(true);//若不先disable掉會造成碰撞問題
 
+            yield return new WaitUntil(() => TriggerEntity.Bool_ALL_TEandCC);
+            GameEventCenter.DispatchEvent("Show_ObjOkayNextTask");
+            yield return new WaitUntil(() => GameUI.Bool_nextTask);
+            DestroyTaskData();
+            TriggerEntity.Bool_ALL_TEandCC = false;
+            GameUI.Bool_nextTask = false;
+        }
+        GameEventCenter.DispatchEvent("Show_ObjGameover");
         
         yield return null;
     }
@@ -147,7 +155,7 @@ public class MissionTask : TaskBase
 
             cubeRebiuld.layer = 8;             //8為clickableLayer
             cubeRebiuld.tag = "Touchable";
-            //List_WallCubes.Add(cubeRebiuld);
+            List_WallCubes.Add(cubeRebiuld);
         }
         //trgs
         for (int i = 0; i < taskdata.List_triggerParentData.Count; i++)
@@ -165,13 +173,15 @@ public class MissionTask : TaskBase
             //triggers
             for (int j = 0; j < taskdata.List_triggerParentData[i].List_triggerData.Count; j++)
             {
-                GameObject trg = new GameObject();
+
+                GameObject trg = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                //GameObject trg = new GameObject();
                 trg.name = taskdata.List_triggerParentData[i].List_triggerData[j].TriggerName;
                 trg.transform.SetParent(trgParent.transform);
-                trg.AddComponent<MeshFilter>();
-                trg.AddComponent<MeshRenderer>();
-                trg.GetComponent<MeshFilter>().mesh = trg_mesh;
-                trg.AddComponent<BoxCollider>();
+                //trg.AddComponent<MeshFilter>();
+                //trg.AddComponent<MeshRenderer>();
+                //trg.GetComponent<MeshFilter>().mesh = trg_mesh;
+                //trg.AddComponent<BoxCollider>();
                 trg.GetComponent<BoxCollider>().isTrigger = true;
 
                 //將trigger縮小並下移(使遊戲能夠較完整的結束)
@@ -219,10 +229,10 @@ public class MissionTask : TaskBase
             GameObject.Destroy(T);
         }
         
-        //foreach (GameObject T in List_TempSavedParent)
-        //{
-        //    GameObject.Destroy(T);
-        //}
+        foreach (GameObject T in List_WallCubes)
+        {
+            GameObject.Destroy(T);
+        }
         //foreach (GameObject T in List_TempSavedParent)
         //{
         //    GameObject.Destroy(T);

@@ -11,4 +11,8 @@ public class MainSceneRes : GameSceneEntityRes
     public GameEntityBase GamePlayerEntity;
 
     public Mesh cubeMesh;
+
+    public GameObject CubeMesh;
+
+    public GameObject OMNI;
 }

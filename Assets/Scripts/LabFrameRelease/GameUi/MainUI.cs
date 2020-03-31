@@ -81,13 +81,24 @@ public class MainUI : MonoBehaviour
         //輸入使用者名稱才能
         //將抓取到的mission做loading
         //Dropdown_missionName.captionText.text
+        if ((IPF_userID.text == ""))
+        {
+            SetUI_Interactable(Obj_StartUI, false);
+            Obj_WhileInputNull.SetActive(true);
+            Obj_WhileInputNull.GetComponentInChildren<Text>().text = "請輸入 User ID";
+        }
+        else
+        {
+            string missionName = Dropdown_missionName.captionText.text;
+            GameFlowData gameFlow = new GameFlowData(IPF_userID.text, data_Missions.Dic_missions[missionName]); //得到對應value值 : Tasks的String
+            GameDataManager.FlowData = gameFlow;
+            var Id = gameFlow.UserId;
+            GameDataManager.LabDataManager.LabDataCollectInit(() => Id);
+            GameSceneManager.Instance.Change2GameScene();
+        }
 
-        string missionName = Dropdown_missionName.captionText.text;
-        GameFlowData gameFlow = new GameFlowData(IPF_userID.text,data_Missions.Dic_missions[missionName]); //得到對應value值 : Tasks的String
-        GameDataManager.FlowData = gameFlow;
-        var Id = gameFlow.UserId;
-        GameDataManager.LabDataManager.LabDataCollectInit(() => Id);
-        GameSceneManager.Instance.Change2GameScene();
+
+        
 
     }
 
@@ -211,8 +222,6 @@ public class MainUI : MonoBehaviour
     {
         GameFlowData gameFlow = new GameFlowData(IPF_userID.text, data_tasks);//還要Input很多東西
         GameDataManager.FlowData = gameFlow;
-        //var Id = gameFlow.UserId;
-        //GameDataManager.LabDataManager.LabDataCollectInit(() => Id);
         GameSceneManager.Instance.Change2BuildScene();
         //轉Scene
     }

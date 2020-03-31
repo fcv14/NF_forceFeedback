@@ -166,7 +166,7 @@ public class BuildUI : MonoBehaviour
             }
             catch 
             {
-                Txt_TaskBuildScuccessfully.text = "關卡名稱重複 請使用新的名稱!";
+                Txt_TaskBuildScuccessfully.text = "關卡名稱錯誤!";
                 Obj_TaskBuildSuccessfully.SetActive(true);
             }
             
