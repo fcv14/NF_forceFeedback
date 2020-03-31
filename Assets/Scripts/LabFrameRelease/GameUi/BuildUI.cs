@@ -164,13 +164,14 @@ public class BuildUI : MonoBehaviour
                 Obj_TaskBuildSuccessfully.SetActive(true);
                 //saveWork
             }
-            catch 
+            catch (System.Exception e) 
             {
-                Txt_TaskBuildScuccessfully.text = "關卡建立失敗!";
+                Txt_TaskBuildScuccessfully.text = "關卡建立失敗!\n"+e;
                 Obj_TaskBuildSuccessfully.SetActive(true);
             }
-            
+
         }
+        
     }
 
     void ColorInit()
@@ -329,6 +330,7 @@ public class BuildUI : MonoBehaviour
 
     void Return2MainUI()
     {
+        BuildTask.List_selectedCubes.Clear();
         GameSceneManager.Instance.Change2MainUI();
     }
 }

@@ -8,8 +8,7 @@ public class EditTask : TaskBase
     private GameObject ClickableCube ;
     private GameObject GamePlayerEntity ;
     private Transform reSpawn_parent;
-    private Mesh trg_mesh;
-
+    
     public static List<ClickableCubeEntity> List_wallCubes = new List<ClickableCubeEntity>();          //牆之方塊List
     public static List<GameObject> List_triggers = new List<GameObject>();           //全部之trigger
     public static List<ClickableCubeEntity> List_selectedCubes = new List<ClickableCubeEntity>();      //被選取方塊
@@ -24,8 +23,7 @@ public class EditTask : TaskBase
         ClickableCube = GameEntityManager.Instance.GetCurrentSceneRes<MainSceneRes>().clickable_prefab.gameObject;
         GamePlayerEntity = GameEntityManager.Instance.GetCurrentSceneRes<MainSceneRes>().GamePlayerEntity.gameObject;
         reSpawn_parent = GameEntityManager.Instance.GetCurrentSceneRes<MainSceneRes>().spanwPos;
-        trg_mesh = GameEntityManager.Instance.GetCurrentSceneRes<MainSceneRes>().CubeMesh.GetComponent<Mesh>();
-
+        
 
         taskname = GameDataManager.FlowData.TaskName;
         LoadTaskData(taskname);
@@ -159,13 +157,9 @@ public class EditTask : TaskBase
             //triggers
             for (int j = 0; j < taskdata.List_triggerParentData[i].List_triggerData.Count; j++)
             {
-                GameObject trg = new GameObject();
+                GameObject trg = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 trg.name = taskdata.List_triggerParentData[i].List_triggerData[j].TriggerName;
                 trg.transform.SetParent(trgParent.transform);
-                trg.AddComponent<MeshFilter>();
-                trg.AddComponent<MeshRenderer>();
-                trg.GetComponent<MeshFilter>().mesh = trg_mesh;//code生成mesh有點麻煩所以到unity用掛的
-                trg.AddComponent<BoxCollider>();
                 trg.GetComponent<BoxCollider>().isTrigger = true;
 
                 //將trigger縮小並下移(使遊戲能夠較完整的結束)

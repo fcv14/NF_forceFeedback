@@ -175,7 +175,6 @@ public class MissionTask : TaskBase
                 GameObject trg = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 trg.name = taskdata.List_triggerParentData[i].List_triggerData[j].TriggerName;
                 trg.transform.SetParent(trgParent.transform);
-                
                 trg.GetComponent<BoxCollider>().isTrigger = true;
 
                 //將trigger縮小並下移(使遊戲能夠較完整的結束)

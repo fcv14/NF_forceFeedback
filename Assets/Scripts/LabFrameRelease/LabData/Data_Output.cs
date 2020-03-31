@@ -6,8 +6,11 @@ using DataSync;
 
 public class Data_Output : LabDataBase
 {
-    public Data_Output() { }
+    public Data_Output(float[] tasktimes,float totaltime) {
+        TaskTimes = tasktimes;
+        TotalTime = totaltime;
+    }
 
-    public float[] taskTimes;
-    public float TotalTime;
+    public float[] TaskTimes { get; set; }
+    public float TotalTime { get; set; }
 }

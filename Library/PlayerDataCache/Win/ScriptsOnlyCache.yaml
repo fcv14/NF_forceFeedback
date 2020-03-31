@@ -2971,7 +2971,7 @@ ScriptsOnlyBuild:
     className: RegisterGlobalParameters
   - hash:
       serializedVersion: 2
-      Hash: 0717ef6574f5376a6082ad522d1360ec
+      Hash: 8b2f90ddd5e5848b5af7b8090592a129
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MainSceneRes

@@ -76,12 +76,12 @@ public class GameUI : MonoBehaviour
         Txt_totalTime.text = (Time.time - start_time).ToString("f2");
         Obj_GameOver.SetActive(true);
 
+        OutputResult();
         //儲存OUTPUT DATA
-        Data_Output data_Output = new Data_Output();
-        data_Output.taskTimes = new float[Count_Tasks];
-        data_Output.taskTimes = time;
-        data_Output.TotalTime = Time.time - start_time;
+    }
 
+    void OutputResult() {
+        Data_Output data_Output = new Data_Output(time, Time.time - start_time);
         GameDataManager.LabDataManager.SendData(GameDataManager.FlowData);
         GameDataManager.LabDataManager.SendData(data_Output);
     }
