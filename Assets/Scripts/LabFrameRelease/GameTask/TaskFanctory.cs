@@ -13,4 +13,22 @@ public class TaskFanctory
         };
         return temptasks;
     }
+
+    public static List<TaskBase> GetBuildTask()
+    {
+        var temptasks = new List<TaskBase>
+        {
+            new BuildTask()
+        };
+        return temptasks;
+    }
+
+    public static List<TaskBase> GetEditTask()
+    {
+        var temptasks = new List<TaskBase>
+        {
+            new EditTask()
+        };
+        return temptasks;
+    }
 }

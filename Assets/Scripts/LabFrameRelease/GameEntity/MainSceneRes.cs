@@ -9,10 +9,6 @@ public class MainSceneRes : GameSceneEntityRes
     public GameEntityBase clickable_prefab;
 
     public GameEntityBase GamePlayerEntity;
-
-    public Mesh cubeMesh;
-
-    public GameObject CubeMesh;
-
+    
     public GameObject OMNI;
 }

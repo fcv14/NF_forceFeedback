@@ -103,7 +103,7 @@ public class BuildUI : MonoBehaviour
                 trg.AddComponent<BoxCollider>();
                 trg.GetComponent<BoxCollider>().isTrigger = true;
 
-                trg.transform.localScale = new Vector3(0.95f, 0.95f, 0.95f);    //縮小
+                trg.transform.localScale = new Vector3(0.85f, 0.85f, 0.85f);    //縮小
             }
 
             //修正完pos後,將select到的set_parent
@@ -166,7 +166,7 @@ public class BuildUI : MonoBehaviour
             }
             catch 
             {
-                Txt_TaskBuildScuccessfully.text = "關卡名稱錯誤!";
+                Txt_TaskBuildScuccessfully.text = "關卡建立失敗!";
                 Obj_TaskBuildSuccessfully.SetActive(true);
             }
             

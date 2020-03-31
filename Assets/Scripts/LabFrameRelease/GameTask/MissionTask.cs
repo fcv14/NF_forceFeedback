@@ -9,7 +9,6 @@ public class MissionTask : TaskBase
     private ClickableCubeEntity ClickableCube;
     private GamePlayerEntity GamePlayerEntity;
     private Transform reSpawn_parent;
-    private Mesh trg_mesh;
     private GameObject OMNI;
 
     public static List<GameObject> List_WallCubes = new List<GameObject>();
@@ -22,7 +21,6 @@ public class MissionTask : TaskBase
     {
         //ClickableCube = GameEntityManager.Instance.GetCurrentSceneRes<MainSceneRes>().clickable_prefab;
         reSpawn_parent = GameEntityManager.Instance.GetCurrentSceneRes<MainSceneRes>().spanwPos;
-        trg_mesh = GameEntityManager.Instance.GetCurrentSceneRes<MainSceneRes>().CubeMesh.GetComponent<MeshFilter>().sharedMesh;
         OMNI = GameEntityManager.Instance.GetCurrentSceneRes<MainSceneRes>().OMNI;
 
         yield return null;
@@ -40,7 +38,7 @@ public class MissionTask : TaskBase
             List_triggers.Clear();
             
             LoadTaskData(taskName);
-            //GameEventCenter.DispatchEvent("alpha_refresh");
+            GameEventCenter.DispatchEvent("alpha_refresh");
             OMNI.SetActive(true);//若不先disable掉會造成碰撞問題
 
             yield return new WaitUntil(() => TriggerEntity.Bool_ALL_TEandCC);
@@ -175,13 +173,9 @@ public class MissionTask : TaskBase
             {
 
                 GameObject trg = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                //GameObject trg = new GameObject();
                 trg.name = taskdata.List_triggerParentData[i].List_triggerData[j].TriggerName;
                 trg.transform.SetParent(trgParent.transform);
-                //trg.AddComponent<MeshFilter>();
-                //trg.AddComponent<MeshRenderer>();
-                //trg.GetComponent<MeshFilter>().mesh = trg_mesh;
-                //trg.AddComponent<BoxCollider>();
+                
                 trg.GetComponent<BoxCollider>().isTrigger = true;
 
                 //將trigger縮小並下移(使遊戲能夠較完整的結束)

@@ -79,7 +79,7 @@ public class GameSceneManager : MonoSingleton<GameSceneManager>, IGameManager
         {
 
             GameEntityManager.Instance.SetSceneEntity,
-            GameTaskManager.Instance.StartGameTask,
+            GameTaskManager.Instance.StartBuildTask,
             
             //TODO 转场出场景需要做的事情
         }, GobalData.BuildScene);
@@ -94,7 +94,7 @@ public class GameSceneManager : MonoSingleton<GameSceneManager>, IGameManager
         {
 
             GameEntityManager.Instance.SetSceneEntity,
-            GameTaskManager.Instance.StartGameTask,
+            GameTaskManager.Instance.StartEditTask,
             
             //TODO 转场出场景需要做的事情
         }, GobalData.EditScene);

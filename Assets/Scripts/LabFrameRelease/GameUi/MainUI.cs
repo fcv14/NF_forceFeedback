@@ -126,7 +126,7 @@ public class MainUI : MonoBehaviour
 
     void GO2Build_MissionUI()
     {
-        if ((IPF_userID.text != "") && (IPF_newMissionName.text!= ""))
+        if (IPF_newMissionName.text!= "")
         {
             //MissionUI
             Obj_MissionCreateUI.SetActive(true);
@@ -136,7 +136,7 @@ public class MainUI : MonoBehaviour
         {
             SetUI_Interactable(Obj_StartUI, false);
             Obj_WhileInputNull.SetActive(true);
-            Obj_WhileInputNull.GetComponentInChildren<Text>().text = "請輸入 User ID 及 任務名稱";
+            Obj_WhileInputNull.GetComponentInChildren<Text>().text = "請輸入任務名稱";
         }
     }
 
@@ -202,8 +202,6 @@ public class MainUI : MonoBehaviour
     {
         GameFlowData gameFlow = new GameFlowData(Dropdown_taskName.captionText.text);//編輯task所需要用到的TaskName
         GameDataManager.FlowData = gameFlow;
-        //var Id = gameFlow.UserId;
-        //GameDataManager.LabDataManager.LabDataCollectInit(() => Id);
         GameSceneManager.Instance.Change2EditScene();
         //轉Scene
     }
