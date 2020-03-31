@@ -3120,4 +3120,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/GameScene.unity
   - Assets/Scenes/EditScene.unity
   - Assets/Scenes/BuildScene.unity
-  playerPath: C:/Users/123/Desktop/1/NF_forceFeedback.exe
+  playerPath: C:/Users/user/Desktop/Build/NF_forceFeedback.exe

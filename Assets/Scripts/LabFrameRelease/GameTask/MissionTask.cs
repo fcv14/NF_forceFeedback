@@ -127,7 +127,7 @@ public class MissionTask : TaskBase
                 temp_CubeColor.a = taskdata.List_cubeParentData[i].List_cubeData[j].cubeColorRGBA[3];
                 cubeRebiuld.GetComponent<Renderer>().material.color = temp_CubeColor;
 
-                cubeRebiuld.tag = "Touchable";
+                //cubeRebiuld.tag = "Touchable";
             }
             List_TempSavedParent.Add(cubeParentRebiuld);
         }
@@ -153,7 +153,7 @@ public class MissionTask : TaskBase
             temp_CubeColor.a = taskdata.List_originCubeData[i].originCubeColorRGBA[3];
             cubeRebiuld.GetComponent<Renderer>().material.color = temp_CubeColor;
 
-            cubeRebiuld.layer = 8;             //8為clickableLayer
+            //cubeRebiuld.layer = 8;             //8為clickableLayer
             cubeRebiuld.tag = "Touchable";
             List_WallCubes.Add(cubeRebiuld);
         }
@@ -188,7 +188,7 @@ public class MissionTask : TaskBase
                 trg.GetComponent<BoxCollider>().size = new Vector3(0.1f, 0.1f, 0.1f);
                 Vector3 trgCenterPos = new Vector3();
                 trgCenterPos = trg.GetComponent<BoxCollider>().center;
-                trgCenterPos.y -= 0.4f;
+                trgCenterPos.y -= 0.3f;
                 trg.GetComponent<BoxCollider>().center = trgCenterPos;
 
                 trg.AddComponent<TriggerEntity>();//script
@@ -211,7 +211,7 @@ public class MissionTask : TaskBase
                 temp_trgColor.b = taskdata.List_triggerParentData[i].List_triggerData[j].TriggerColorRGBA[2];
                 temp_trgColor.a = taskdata.List_triggerParentData[i].List_triggerData[j].TriggerColorRGBA[3];
                 trg.GetComponent<MeshRenderer>().material.SetColor("_Color", temp_trgColor);
-                trg.GetComponent<Renderer>().material.shader = Shader.Find("Transparent/Diffuse");
+                trg.GetComponent<Renderer>().material.shader = Shader.Find("Transparent/Diffuse");//build 要加入這個shader
 
                 List_triggers.Add(trg);
             }
