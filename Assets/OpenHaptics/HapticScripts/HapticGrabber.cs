@@ -19,9 +19,9 @@ public class HapticGrabber : MonoBehaviour
 	private  GameObject hapticDevice = null;   //!< Reference to the GameObject representing the Haptic Device
 	private bool buttonStatus = false;			//!< Is the button currently pressed?
 	private GameObject touching = null;			//!< Reference to the object currently touched
-	private GameObject grabbing = null;			//!< Reference to the object currently grabbed
-	private FixedJoint joint = null;			//!< The Unity physics joint created between the stylus and the object being grabbed.
-
+	private GameObject grabbing = null;         //!< Reference to the object currently grabbed
+    private FixedJoint Fixed_joint = null;			//!< The Unity physics joint created between the stylus and the object being grabbed.
+    private CharacterJoint Character_joint = null;
 
     public GameObject SphereBall;
 
@@ -249,10 +249,19 @@ public class HapticGrabber : MonoBehaviour
 			grabbing = parent;
 			body = grabbing.GetComponent<Rigidbody>();
 		}
+
         
-		joint = (FixedJoint)gameObject.AddComponent(typeof(FixedJoint));
-		joint.connectedBody = body;
-	}
+        if (GameDataManager.FlowData.Rotation)
+        {
+            Fixed_joint = (FixedJoint)gameObject.AddComponent(typeof(FixedJoint));
+            Fixed_joint.connectedBody = body;
+        }
+        else
+        {
+            Character_joint = (CharacterJoint)gameObject.AddComponent(typeof(CharacterJoint));
+            Character_joint.connectedBody = body;
+        }
+    }
 	//! changes the layer of an object, and every child of that object.
 
 
@@ -270,14 +279,25 @@ public class HapticGrabber : MonoBehaviour
 		if( grabbing == null ) //Nothing to release
 			return;
 
+        if (GameDataManager.FlowData.Rotation)
+        {
+            Debug.Assert(Fixed_joint != null);
 
-		Debug.Assert(joint != null);
-        
-		if(joint!=null)
-		{
-	      joint.connectedBody = null;
-		   Destroy(joint);
-		}
+            if (Fixed_joint != null)
+            {
+                Fixed_joint.connectedBody = null;
+                Destroy(Fixed_joint);
+            }
+        }
+        else
+        {
+            if (Character_joint != null)
+            {
+                Character_joint.connectedBody = null;
+                Destroy(Character_joint);
+            }
+        }
+
 	
 
 
