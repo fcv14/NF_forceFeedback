@@ -29,8 +29,9 @@ public class BuildUI : MonoBehaviour
     public Text Txt_TaskBuildScuccessfully;
     public Button Btn_Okay_TaskBuildSuccessfully;
 
-
-
+    Data_TaskS data_tasks = GameDataManager.FlowData.DataTasks;
+    TaskData taskData = new TaskData();
+    string taskName = "task_000";
     
     private float Cube_alpha;
     private int color_Num = 0;
@@ -42,9 +43,7 @@ public class BuildUI : MonoBehaviour
     private List<GameObject> tempSavedTrgParent = new List<GameObject>();         //將trgParent暫時存入之List
 
 
-    Data_TaskS data_tasks = GameDataManager.FlowData.DataTasks;
-    TaskData taskData = new TaskData();
-    string taskName = "task_000";
+
     
 
     void Start()

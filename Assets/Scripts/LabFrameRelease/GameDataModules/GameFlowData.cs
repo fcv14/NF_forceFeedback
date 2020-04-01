@@ -17,8 +17,17 @@ namespace GameData
         /// <summary>
         /// 任務名稱
         /// </summary>
-        public Data_Missions Missions { get; set; }//還沒用
+        public string MissionsName { get; set; }
 
+        /// <summary>
+        /// 是否旋轉
+        /// </summary>
+        public bool Rotation { get; set; }
+
+        /// <summary>
+        /// 是否使用透明提示
+        /// </summary>
+        public bool TransparentHint { get; set; }
 
         /// <summary>
         /// Tasks
@@ -34,24 +43,36 @@ namespace GameData
 
         public List<string> List_tasksName { get; set; }
 
+        
         /// <summary>
-        /// FlowData 构造函数
+        /// Build要用到的FlowData
         /// </summary>
-        public GameFlowData(string userID , Data_TaskS data_tasks)
+        /// <param name="data_TaskS"></param>
+        public GameFlowData(Data_TaskS data_TaskS)
         {
-            UserId = userID;
-            DataTasks = data_tasks;
+            DataTasks = data_TaskS;
         }
-
+        /// <summary>
+        /// Edit要用到的FlowData
+        /// </summary>
+        /// <param name="taskname"></param>
         public GameFlowData(string taskname)
         {
             TaskName = taskname;
         }
 
-        public GameFlowData(string userID ,List<string> list_tasksName)
+        /// <summary>
+        /// 給Game用的
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <param name="list_tasksName"></param>
+        public GameFlowData(string userID,string missionName ,List<string> list_tasksName,bool rotation,bool transparentHint)
         {
             UserId = userID;
+            MissionsName = missionName;
             List_tasksName = list_tasksName;
+            Rotation = rotation;
+            TransparentHint = transparentHint;
         }
 
 

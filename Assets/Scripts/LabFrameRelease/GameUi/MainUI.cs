@@ -15,11 +15,18 @@ public class MainUI : MonoBehaviour
     public Button Btn_loadMission;
     public Button Btn_deleteMission;
     public Button Btn_EnterMissionName;
+    public Toggle Toggle_Rotation;
+    public Toggle Toggle_TransparentHint;
     [Space(10)]
     public GameObject Obj_After_buildClicked;
     public InputField IPF_newMissionName;
     public Button Btn_GO2buildMission;
-    
+
+    public GameObject Obj_Delete_M_Confirm;
+    public Text Txt_Delete_M_Confirm;
+    public Button Btn_Delete_M_Yes;
+    public Button Btn_Delete_M_No;
+
 
     [Header("MissionBuild_UI")]
     public GameObject Obj_MissionCreateUI;
@@ -49,7 +56,7 @@ public class MainUI : MonoBehaviour
     {
         //StartUI Buttons
         Btn_loadMission.onClick.AddListener(delegate { Load_Mission(); });
-        Btn_deleteMission.onClick.AddListener(delegate { Delete_Mission(); });
+        Btn_deleteMission.onClick.AddListener(delegate { Delete_M_Confrim(); });
         Btn_EnterMissionName.onClick.AddListener(delegate { EnterMissionName(); });
         Btn_GO2buildMission.onClick.AddListener(delegate { GO2Build_MissionUI(); });
         //MissionBuildUI Buttons
@@ -90,7 +97,7 @@ public class MainUI : MonoBehaviour
         else
         {
             string missionName = Dropdown_missionName.captionText.text;
-            GameFlowData gameFlow = new GameFlowData(IPF_userID.text, data_Missions.Dic_missions[missionName]); //得到對應value值 : Tasks的String
+            GameFlowData gameFlow = new GameFlowData(IPF_userID.text, missionName, data_Missions.Dic_missions[missionName],Toggle_Rotation.isOn,Toggle_TransparentHint.isOn); //得到Dictionary對應value值,也就是Tasks的StringList
             GameDataManager.FlowData = gameFlow;
             var Id = gameFlow.UserId;
             GameDataManager.LabDataManager.LabDataCollectInit(() => Id);
@@ -100,6 +107,23 @@ public class MainUI : MonoBehaviour
 
         
 
+    }
+
+    void Delete_M_Confrim()
+    {
+        Txt_Delete_M_Confirm.text = "是否確定刪除 " + Dropdown_missionName.captionText.text + " 任務";
+        Obj_Delete_M_Confirm.SetActive(true);
+    }
+
+    void Delete_M_Yes()
+    {
+        Delete_Mission();
+        Obj_Delete_M_Confirm.SetActive(false);
+    }
+
+    void Delete_M_No()
+    {
+        Obj_Delete_M_Confirm.SetActive(false);
     }
 
     void Delete_Mission()
@@ -218,7 +242,7 @@ public class MainUI : MonoBehaviour
 
     void Build_Task()
     {
-        GameFlowData gameFlow = new GameFlowData(IPF_userID.text, data_tasks);//還要Input很多東西
+        GameFlowData gameFlow = new GameFlowData(data_tasks);//還要Input很多東西
         GameDataManager.FlowData = gameFlow;
         GameSceneManager.Instance.Change2BuildScene();
         //轉Scene

@@ -38,7 +38,7 @@ public class MissionTask : TaskBase
             List_triggers.Clear();
             
             LoadTaskData(taskName);
-            GameEventCenter.DispatchEvent("alpha_refresh");
+            GameEventCenter.DispatchEvent("Toggle_Alpha");
             OMNI.SetActive(true);//若不先disable掉會造成碰撞問題
             yield return new WaitUntil(() => TriggerEntity.Bool_ALL_TEandCC);
             GameEventCenter.DispatchEvent("Show_ObjOkayNextTask");
@@ -88,6 +88,7 @@ public class MissionTask : TaskBase
             cubeParentRebiuld.transform.position = temp_ParentPos;
 
             cubeParentRebiuld.AddComponent<Rigidbody>();
+            cubeParentRebiuld.GetComponent<Rigidbody>().freezeRotation = ! GameDataManager.FlowData.Rotation;
             cubeParentRebiuld.tag = "Touchable";
 
             for (int j = 0; j < taskdata.List_cubeParentData[i].List_cubeData.Count; j++)

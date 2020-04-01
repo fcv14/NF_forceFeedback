@@ -9,6 +9,7 @@ using LabData;
 public class GameUI : MonoBehaviour
 {
     public Slider Slider_ColorAlpha;
+    private float f_ColorAjpha = 0.4f;
 
     public GameObject Obj_timeTable;
     public Text Txt_Stage;
@@ -43,7 +44,7 @@ public class GameUI : MonoBehaviour
         Slider_ColorAlpha.onValueChanged.AddListener(delegate { Slider_alphaChange(); });
         GameEventCenter.AddEvent("Show_ObjOkayNextTask",Okay_NextTaskAndTimeData);
         GameEventCenter.AddEvent("Show_ObjGameover",Okay_Gameover);
-        GameEventCenter.AddEvent("alpha_refresh", Slider_alphaChange);
+        GameEventCenter.AddEvent("Toggle_Alpha", Toggle_alphaChange);
 
         Count_Tasks = GameDataManager.FlowData.List_tasksName.Count;
         start_time = Time.time;
@@ -109,5 +110,19 @@ public class GameUI : MonoBehaviour
             C_A.b = trg_P.GetComponent<Renderer>().material.color.b;
             trg_P.transform.GetComponent<Renderer>().material.color = C_A;
         }
+    }
+    void Toggle_alphaChange()
+    {
+        if (GameDataManager.FlowData.TransparentHint) {
+            Cube_alpha = f_ColorAjpha;
+            foreach (var trg_P in MissionTask.List_triggers)
+            {
+                Color C_A = new Color();
+                C_A.a = Cube_alpha;
+                C_A.r = trg_P.GetComponent<Renderer>().material.color.r;
+                C_A.g = trg_P.GetComponent<Renderer>().material.color.g;
+                C_A.b = trg_P.GetComponent<Renderer>().material.color.b;
+                trg_P.transform.GetComponent<Renderer>().material.color = C_A;
+            } }
     }
 }
