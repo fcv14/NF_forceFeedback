@@ -78,6 +78,8 @@ public class GameUI : MonoBehaviour
 
         OutputResult();
         //儲存OUTPUT DATA
+        GameApplication.Instance.GameApplicationQuit();
+       
     }
 
     void OutputResult() {

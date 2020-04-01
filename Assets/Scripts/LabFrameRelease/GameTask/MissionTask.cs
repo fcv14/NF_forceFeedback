@@ -40,7 +40,6 @@ public class MissionTask : TaskBase
             LoadTaskData(taskName);
             GameEventCenter.DispatchEvent("alpha_refresh");
             OMNI.SetActive(true);//若不先disable掉會造成碰撞問題
-
             yield return new WaitUntil(() => TriggerEntity.Bool_ALL_TEandCC);
             GameEventCenter.DispatchEvent("Show_ObjOkayNextTask");
             yield return new WaitUntil(() => GameUI.Bool_nextTask);
@@ -125,7 +124,7 @@ public class MissionTask : TaskBase
                 temp_CubeColor.a = taskdata.List_cubeParentData[i].List_cubeData[j].cubeColorRGBA[3];
                 cubeRebiuld.GetComponent<Renderer>().material.color = temp_CubeColor;
 
-                //cubeRebiuld.tag = "Touchable";
+                cubeRebiuld.tag = "Touchable";
             }
             List_TempSavedParent.Add(cubeParentRebiuld);
         }

@@ -84,6 +84,7 @@ public class GameApplication : MonoSingleton<GameApplication>
 
     protected override void OnApplicationQuit()
     {
+        Debug.Log("123");
         GameApplicationQuit();
         base.OnApplicationQuit();
     }
