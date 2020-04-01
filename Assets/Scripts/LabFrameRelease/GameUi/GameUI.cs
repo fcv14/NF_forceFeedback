@@ -52,6 +52,10 @@ public class GameUI : MonoBehaviour
 
         Txt_Stage.text = (i + 1) + "/" + Count_Tasks;
     }
+    private void Update()
+    {
+        Txt_time.text =  (Time.time - temp_time).ToString("f1");
+    }
 
     void Okay_NextTaskAndTimeData()
     {

@@ -330,6 +330,8 @@ public class BuildUI : MonoBehaviour
 
     void Return2MainUI()
     {
+        BuildTask.List_wallCubes.Clear();
+        BuildTask.List_triggers.Clear();
         BuildTask.List_selectedCubes.Clear();
         GameSceneManager.Instance.Change2MainUI();
     }
